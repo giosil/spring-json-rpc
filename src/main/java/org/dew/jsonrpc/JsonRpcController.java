@@ -12,22 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class JsonRpcController {
 
   Logger logger = LoggerFactory.getLogger(JsonRpcController.class);
-  
+
   static {
     JsonRpc.addHandler("DEMO", new org.dew.demo.Demo());
   }
 
-  @GetMapping("/")
-  public String index() {
-    logger.info("index...");
-    
-    return "JsonRpcController is runnnig.";
+  @GetMapping("/rpc")
+  public String hello() {
+    logger.info("JsonRpcController.hello");
+    return "Hello from JsonRpc.";
   }
-  
+
   @PostMapping("/rpc")
   public JsonRpcResponse invoke(@RequestBody JsonRpcRequest request) {
-    logger.info("invoke...");
-    
     return JsonRpc.invoke(request);
   }
 

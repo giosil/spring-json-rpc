@@ -1,4 +1,4 @@
-package org.dew.springjsonrpc;
+package org.dew.jsonrpc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

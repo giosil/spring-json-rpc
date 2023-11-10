@@ -1,4 +1,4 @@
-package org.dew.springjsonrpc;
+package org.dew.jsonrpc;
 
 import java.util.HashMap;
 import java.util.Map;

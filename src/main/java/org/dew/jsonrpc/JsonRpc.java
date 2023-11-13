@@ -3,9 +3,12 @@ package org.dew.jsonrpc;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 /* external */
 import org.dew.util.RefUtil;
 
+@Service
 public class JsonRpc {
 
   public static final int PARSE_ERROR_CODE            = -32700;
@@ -15,23 +18,23 @@ public class JsonRpc {
   public static final int INTERNAL_ERROR_CODE         = -32603;
   public static final int SERVER_ERROR_START          = -32000;
 
-  protected static Map<String, Object> handlers = new HashMap<>();
+  protected Map<String, Object> handlers = new HashMap<>();
   
-  public static void addHandler(String key, Object handler) {
+  public void addHandler(String key, Object handler) {
     if(key == null || handler == null) return;
     handlers.put(key, handler);
   }
 
-  public static void removeHandler(String key, Object handler) {
+  public void removeHandler(String key, Object handler) {
     if(key == null) return;
     handlers.remove(key);
   }
 
-  public static void clear() {
+  public void clear() {
     handlers.clear();
   }
 
-  public static JsonRpcResponse invoke(JsonRpcRequest request) {
+  public JsonRpcResponse invoke(JsonRpcRequest request) {
     if(request == null) {
       return new JsonRpcResponse(new JsonRpcError(INVALID_REQUEST_ERROR_CODE, "Invalid request"));
     }

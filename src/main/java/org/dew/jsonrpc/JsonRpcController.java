@@ -2,7 +2,7 @@ package org.dew.jsonrpc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +13,13 @@ public class JsonRpcController {
 
   Logger logger = LoggerFactory.getLogger(JsonRpcController.class);
 
-  static {
-    JsonRpc.addHandler("DEMO", new org.dew.demo.Demo());
+  protected JsonRpc jsonrpc;
+
+  @Autowired
+  public JsonRpcController(JsonRpc jsonrpc) {
+    this.jsonrpc = jsonrpc;
+    // Handlers
+    this.jsonrpc.addHandler("DEMO", new org.dew.demo.Demo());
   }
 
   @GetMapping("/rpc")
@@ -25,7 +30,7 @@ public class JsonRpcController {
 
   @PostMapping("/rpc")
   public JsonRpcResponse invoke(@RequestBody JsonRpcRequest request) {
-    return JsonRpc.invoke(request);
+    return jsonrpc.invoke(request);
   }
 
 }

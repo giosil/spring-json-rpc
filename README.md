@@ -18,6 +18,10 @@ Implementation of JSON-RPC protocol based on Spring Boot.
 
 - `mvn spring-boot:run`
 
+## Run on Docker
+
+- `docker compose up -d`
+
 ## Test
 
 POST `http://localhost:8080/rpc`

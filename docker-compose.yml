@@ -1,0 +1,23 @@
+services:
+  spring-json-rpc:
+    image: giosil/spring-json-rpc
+    build: .
+    environment:
+      URL: https://github.com/giosil/spring-json-rpc.git
+      BRANCH: master
+      PORT: 8080
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/rpc | grep Hello || exit 1"
+      interval: 10s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+
+volumes:
+  mvn-cache:

@@ -26,6 +26,8 @@ Implementation of JSON-RPC protocol based on Spring Boot.
 
 POST `http://localhost:8080/rpc`
 
+Content-Type: application/json
+
 ```json
 {
   "id": 1,
